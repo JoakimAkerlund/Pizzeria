@@ -7,10 +7,10 @@ namespace PizzeriaTomasos.Models
 {
     public class Order
     {
-        public int OrderId { get; set; }
+        public int Id { get; set; }
         public DateTime OrderDate { get; set; }
-        public int TotalCost { get; set; }
+        public decimal TotalCost { get; set; }
         public bool Delivered { get; set; }
-        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
     }
 }

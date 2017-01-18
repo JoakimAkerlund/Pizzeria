@@ -7,7 +7,8 @@ namespace PizzeriaTomasos.Models
 {
     public class Ingredient
     {
-        public int IngredientId { get; set; }
+        public int Id { get; set; }
         public string IngredientName { get; set; }
+        public List<DishIngredients> DishIngredients { get; set; }
     }
 }

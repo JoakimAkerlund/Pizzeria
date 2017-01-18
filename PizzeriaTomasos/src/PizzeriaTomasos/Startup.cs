@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using PizzeriaTomasos.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace PizzeriaTomasos
 {
@@ -29,10 +31,13 @@ namespace PizzeriaTomasos
         {
             // Add framework services.
             services.AddMvc();
+            var connection =
+            @"Server=(localdb)\mssqllocaldb;Database=Pizzeria Tomasos;Trusted_Connection=True;";
+            services.AddDbContext<OrderContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,OrderContext context)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -55,6 +60,7 @@ namespace PizzeriaTomasos
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            DbInitializer.Initialize(context);
         }
     }
 }

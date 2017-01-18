@@ -7,10 +7,11 @@ namespace PizzeriaTomasos.Models
 {
     public class Dish
     {
-        public int DishId { get; set; }
+        public int Id { get; set; }
         public string DishName { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-        public int CategoryId { get; set; }
+        public DishCategory DishCategory { get; set; }
+        public List<DishIngredients> DishIngridients { get; set; }
     }
 }
